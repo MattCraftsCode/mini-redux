@@ -1,4 +1,4 @@
-import React, { useContext, useReducer, useLayoutEffect } from "react";
+import React, { useContext, useReducer, useLayoutEffect, useMemo } from "react";
 import ReactReduxContext from "./ReactReduxContext";
 import bindActionCreators from "../redux/bindActionCreators";
 
@@ -17,23 +17,29 @@ function connect(mapStateToProps, mapDispatchToProps) {
 
       const prevState = getState();
 
+      // 优化: 防止重复加载
       // 做一个映射，得到最新的状态
-      const stateProps = mapStateToProps(prevState);
+      const stateProps = useMemo(() => mapStateToProps(prevState), [prevState]);
 
-      let dispatchProps;
-      if (typeof mapDispatchToProps === "function") {
-        // mapDispatchToProps 为函数，对应的是这种使用方式
-        // mapDispatchToProps = (dispatch) => ({
-        //   add() {
-        //     dispatch({ type: "ADD" });
-        //   },
-        // });
-        dispatchProps = mapDispatchToProps(dispatch);
-      } else if (typeof mapDispatchToProps === "object") {
-        dispatchProps = bindActionCreators(mapDispatchToProps, dispatch);
-      } else {
-        dispatchProps = { dispatch };
-      }
+      // 优化: 防止重复加载
+      let dispatchProps = useMemo(() => {
+        let dispatchProps;
+        if (typeof mapDispatchToProps === "function") {
+          // mapDispatchToProps 为函数，对应的是这种使用方式
+          // mapDispatchToProps = (dispatch) => ({
+          //   add() {
+          //     dispatch({ type: "ADD" });
+          //   },
+          // });
+          dispatchProps = mapDispatchToProps(dispatch);
+        } else if (typeof mapDispatchToProps === "object") {
+          dispatchProps = bindActionCreators(mapDispatchToProps, dispatch);
+        } else {
+          dispatchProps = { dispatch };
+        }
+
+        return dispatchProps;
+      }, [dispatch]);
 
       // 让组件刷新，重新执行 compareTwoVDOM
       const [, forceUpdate] = useReducer((x) => x + 1, 0);

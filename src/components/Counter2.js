@@ -6,7 +6,13 @@ import actions from "../store/actions/counter2";
 // console.log(store.getState());
 const boundActionCreators = bindActionCreators(actions, store.dispatch);
 class Counter2 extends React.Component {
-  state = { number: 0 };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      number: store.getState().counter2.number,
+    };
+  }
 
   componentDidMount() {
     store.subscribe(() => {
