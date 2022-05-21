@@ -6,6 +6,7 @@
  */
 function bindActionCreator(actionCreator, dispatch) {
   return function (...args) {
+    // this === undefined
     return dispatch(actionCreator.apply(this, args));
   };
 }

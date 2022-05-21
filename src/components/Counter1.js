@@ -17,8 +17,9 @@ class Counter1 extends React.Component {
     return (
       <div>
         {this.state.number}
-        <button onClick={boundActionCreators.add}>+</button>
         <button onClick={boundActionCreators.minus}>-</button>
+        <button onClick={boundActionCreators.add}>+</button>
+        <button onClick={boundActionCreators.reset}>reset</button>
       </div>
     );
   }

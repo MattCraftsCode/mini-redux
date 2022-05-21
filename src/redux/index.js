@@ -8,6 +8,7 @@ export const createStore = (reducer) => {
   }
 
   function dispatch(action) {
+    // combinedRecuers 已经合并后的函数
     state = reducer(state, action);
 
     // 更新 state 后，触发 subscribe

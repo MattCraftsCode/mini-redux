@@ -1,9 +1,14 @@
+import { ADD1, MINUS1, RESET } from "../actions-type";
+
 const actions = {
   add() {
-    return { type: "ADD1" };
+    return { type: ADD1 };
   },
   minus() {
-    return { type: "MINUS1" };
+    return { type: MINUS1 };
+  },
+  reset() {
+    return { type: RESET };
   },
 };
 
