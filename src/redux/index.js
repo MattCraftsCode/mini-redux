@@ -1,6 +1,6 @@
 // redux 的实现
-export const createStore = (reducer) => {
-  let state;
+export const createStore = (reducer, preloadedState) => {
+  let state = preloadedState;
   const listeners = [];
 
   function getState() {

@@ -1,8 +1,9 @@
 import React from "react";
 import bindActionCreators from "../redux/bindActionCreators";
-import { store } from "../store";
+import store from "../store";
 import actions from "../store/actions/counter2";
 
+// console.log(store.getState());
 const boundActionCreators = bindActionCreators(actions, store.dispatch);
 class Counter2 extends React.Component {
   state = { number: 0 };
