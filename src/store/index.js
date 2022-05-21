@@ -1,16 +1,9 @@
 import { createStore } from "../redux";
+import combinedReducers from "./reducers";
 
-const initialState = { number: 0 };
+// 合并 reducers
+const store = createStore(combinedReducers);
 
-export const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    case "ADD":
-      return { number: state.number + action.number };
-    case "MINUS":
-      return { number: state.number - action.number };
-    default:
-      return state;
-  }
-};
+// console.log("store.index", store);
 
-export const store = createStore(reducer);
+export { store };
