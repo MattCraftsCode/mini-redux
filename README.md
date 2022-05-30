@@ -24,12 +24,12 @@ yarn build
 
 ### Support
 
-- compose
-- bindActionCreators
-- react-redux & hooks
-- applyMiddleware
-- thunk & logger
-- connect & mapStateToProps & mapDispatchToProps
+- [√] compose
+- [√] bindActionCreators
+- [√] react-redux & hooks
+- [√] applyMiddleware
+- [√] thunk & logger
+- [√] connect & mapStateToProps & mapDispatchToProps
 
 ## TODO
 
